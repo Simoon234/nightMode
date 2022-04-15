@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {createContext, useState} from 'react';
+import {Name} from "./components/Name";
+import sun from './images/sun.png';
+import moon from './images/moon.png';
 
-function App() {
+
+interface BackgroundContext {
+    background: string;
+    setBackground: () => void;
+}
+
+
+export const App = () =>  {
+    const backgroundContext = createContext<BackgroundContext | null>(null);
+    const [theme, setTheme] = useState<string>('light');
+
+    const toggleTheme = () => {
+        setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+          <backgroundContext.Provider value={{background: theme, setBackground: toggleTheme}} >
+              <div className="application" id={theme}>
+                  <Name/>
+                  <img onClick={toggleTheme} src={theme === 'light' ? sun : moon} alt="nooo"/>
+                  <label>{theme === 'light' ? 'light mode' : 'dark mode'}</label>
+              </div>
+          </backgroundContext.Provider>
+      </>
+
   );
 }
 
-export default App;
