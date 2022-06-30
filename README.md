@@ -4,7 +4,7 @@ TypeScript
 CSS
 HTML 
 
-VERY simple, but GOOD LOOKING "landing-page" :D
+Say my name, say my name!
 
 Available at the link down below | 
 
